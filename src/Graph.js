@@ -16,7 +16,7 @@ const formatDate = d =>
 
 const Graph = ({ websocketUrl, title, subtitle }) => {
   const { max } = React.useContext(YAxisProvider);
-  const data = useWebsocket(websocketUrl);
+  const { messages: data, error } = useWebsocket(websocketUrl);
 
   const [xAxisData, seriesData] = React.useMemo(
     () =>
@@ -70,6 +70,17 @@ const Graph = ({ websocketUrl, title, subtitle }) => {
       ]
     };
   }, [seriesData, subtitle, title, xAxisData, max]);
+
+  if (error !== null) {
+    return (
+      <p>
+        Error connecting to Websocket {websocketUrl}.<br />
+        <strong>
+          Sometimes Adblockers interfere with the Websocket connection.
+        </strong>{" "}
+      </p>
+    );
+  }
 
   return (
     <ReactEcharts option={echartsOptions} notMerge={true} lazyUpdate={true} />

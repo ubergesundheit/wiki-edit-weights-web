@@ -19,6 +19,8 @@ const parseDuration = d => {
 };
 
 const useWebsocket = url => {
+  const [error, setError] = React.useState(null);
+
   const { updateMax } = React.useContext(YAxisContext);
 
   const [allowedNumMessages, setAllowedNumMessages] = React.useState(0);
@@ -49,12 +51,17 @@ const useWebsocket = url => {
       setAllowedNumMessages(Math.floor(backlog / interval) - 1);
     }
 
+    setError(null);
+
     const ws = new WebSocket(url);
     ws.addEventListener("open", () => {
       ws.addEventListener("message", ev => {
         const json = JSON.parse(ev.data);
         updateMessages(json);
       });
+    });
+    ws.addEventListener("error", () => {
+      setError(true);
     });
     websocket.current = ws;
     return () => {
@@ -64,7 +71,7 @@ const useWebsocket = url => {
     };
   }, [url]);
 
-  return messages;
+  return { messages, error };
 };
 
 export default useWebsocket;
