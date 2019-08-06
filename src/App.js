@@ -4,6 +4,7 @@ import Graph from "./Graph";
 
 import { YAxisProvider } from "./YAxisContext";
 
+const websocketBaseUrl = "wss://wiki-diff-srv.vo1d.space"
 const interval = "10s";
 const backlog = "5m";
 
@@ -17,14 +18,14 @@ const App = () => {
             <Graph
               title="English Wikipedia"
               subtitle="Aggregated change sizes"
-              websocketUrl={`ws://falafel.vo1d.space:8080/ws?interval=${interval}&backlog=${backlog}`}
+              websocketUrl={`${websocketBaseUrl}/en/ws?interval=${interval}&backlog=${backlog}`}
             />
           </div>
           <div className="graph-wrapper">
             <Graph
               title="German Wikipedia"
               subtitle="Aggregated change sizes"
-              websocketUrl={`ws://falafel.vo1d.space:8090/ws?interval=${interval}&backlog=${backlog}`}
+              websocketUrl={`${websocketBaseUrl}/de/ws?interval=${interval}&backlog=${backlog}`}
             />
           </div>
         </div>
