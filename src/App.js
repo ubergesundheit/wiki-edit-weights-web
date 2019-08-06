@@ -4,7 +4,7 @@ import Graph from "./Graph";
 
 import { YAxisProvider } from "./YAxisContext";
 
-const websocketBaseUrl = "wss://wiki-diff-srv.vo1d.space"
+const websocketBaseUrl = "wss://wiki-diff-srv.pape.dev";
 const interval = "10s";
 const backlog = "5m";
 
