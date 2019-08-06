@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Graph from "./Graph";
 
-function App() {
+import { YAxisProvider } from "./YAxisContext";
+
+const interval = "10s";
+const backlog = "5m";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Change sizes of Wikipedia edits</h1>
+      <YAxisProvider>
+        <div className="app-wrapper">
+          <div className="graph-wrapper">
+            <Graph
+              title="English Wikipedia"
+              subtitle="Aggregated change sizes"
+              websocketUrl={`ws://falafel.vo1d.space:8080/ws?interval=${interval}&backlog=${backlog}`}
+            />
+          </div>
+          <div className="graph-wrapper">
+            <Graph
+              title="German Wikipedia"
+              subtitle="Aggregated change sizes"
+              websocketUrl={`ws://falafel.vo1d.space:8090/ws?interval=${interval}&backlog=${backlog}`}
+            />
+          </div>
+        </div>
+      </YAxisProvider>
+    </>
   );
-}
+};
 
 export default App;
