@@ -44,13 +44,11 @@ const Graph = ({ websocketUrl, title, subtitle }) => {
       tooltip: {
         trigger: "axis"
       },
-      toolbox: {
-        show: false
-      },
-      dataZoom: {
-        show: false,
-        start: 0,
-        end: 100
+      grid: {
+        left: 70,
+        top: 70,
+        right: 20,
+        bottom: 20
       },
       xAxis: {
         type: "category",
