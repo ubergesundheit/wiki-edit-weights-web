@@ -3,4 +3,5 @@
   grid-template-columns: 1fr 1fr;
   margin-top: 10vh;
   gap: 1em;
+  margin: 0 1em;
 }
